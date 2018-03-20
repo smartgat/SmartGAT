@@ -92,6 +92,7 @@ public class SigninFragment extends Fragment {
 
     public void loginClicked(final View view1) {
         try {
+            //final
             progressBar.setVisibility(View.VISIBLE);
             mAuth.signOut();
             mAuth.signInWithEmailAndPassword(userET.getText().toString(), passET.getText().toString())
