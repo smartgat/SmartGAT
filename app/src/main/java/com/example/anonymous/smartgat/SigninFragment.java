@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ public class SigninFragment extends Fragment {
     private FirebaseAuth mAuth;
     private EditText userET, passET;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -37,7 +39,8 @@ public class SigninFragment extends Fragment {
             container.removeAllViews();
         }
         final View view = inflater.inflate(R.layout.fragment_sigin, container, false);
-
+        progressBar = view.findViewById(R.id.signInPB);
+        progressBar.setVisibility(View.GONE);
         mAuth = FirebaseAuth.getInstance();
         userET = view.findViewById(R.id.userET);
         passET = view.findViewById(R.id.passET);
@@ -86,8 +89,10 @@ public class SigninFragment extends Fragment {
         mAuth.removeAuthStateListener(authStateListener);
     }
 
+
     public void loginClicked(final View view1) {
         try {
+            progressBar.setVisibility(View.VISIBLE);
             mAuth.signOut();
             mAuth.signInWithEmailAndPassword(userET.getText().toString(), passET.getText().toString())
                     .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -96,10 +101,12 @@ public class SigninFragment extends Fragment {
                             if (task.isSuccessful()) {
                                 if (mAuth.getCurrentUser() != null) {
                                     if (!mAuth.getCurrentUser().isEmailVerified()) {
+                                        progressBar.setVisibility(View.GONE);
                                         mAuth.getCurrentUser().sendEmailVerification();
                                         LoginActivity.showToast(getView().getContext(), "A verification mail is sent to " + mAuth.getCurrentUser().getEmail() + ".");
                                     } else {
                                         try{
+                                            progressBar.setVisibility(View.GONE);
                                             getFragmentManager().beginTransaction().replace(R.id.loginFragment,new LoggedInFragment()).commit();
                                         }catch (Exception e){
 
@@ -110,6 +117,7 @@ public class SigninFragment extends Fragment {
                         }
                     });
         } catch (Exception e) {
+            progressBar.setVisibility(View.GONE);
             LoginActivity.showToast(view1.getContext(), e.getMessage());
         }
     }
@@ -162,4 +170,5 @@ public class SigninFragment extends Fragment {
     public void registerClicked(View view) {
         startActivity(new Intent(view.getContext(), RegisterActivity.class));
     }
+
 }

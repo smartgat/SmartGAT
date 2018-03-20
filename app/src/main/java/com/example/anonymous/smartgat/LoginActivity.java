@@ -100,6 +100,9 @@ public class LoginActivity extends AppCompatActivity
                 if(firebaseAuth.getCurrentUser() != null){
                     navigationNameTV.setText(mAuth.getCurrentUser().getDisplayName());
                     navigationEmailTV.setText(mAuth.getCurrentUser().getEmail());
+                }else{
+                    navigationNameTV.setText("Smart-GAT");
+                    navigationEmailTV.setText("smartgat2k18@gmail.com");
                 }
             }
         };
