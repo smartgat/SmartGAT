@@ -40,9 +40,10 @@ public class LoginActivity extends AppCompatActivity
 
     private static Toast mToast = null;
     private ZXingScannerView zXingScannerView;
-    public static String scanResult = "null";
+    public static String scanResult = "null",url_to_open="http://tourism.rajasthan.gov.in/tourist-destinations.html";
     private DrawerLayout drawer;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener authStateListener ;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    url_to_open = "http://tourism.rajasthan.gov.in/tourist-destinations.html";
                     changeFragment(new WebViewFragment());
                     return true;
                 case R.id.navigation_scan:
@@ -87,18 +89,20 @@ public class LoginActivity extends AppCompatActivity
         NavigationView navigationView =  findViewById(R.id.nav_view);
         View header = navigationView.getHeaderView(0);
 
-        TextView navigationNameTV = header.findViewById(R.id.navigationNameTV);
-        TextView navigationEmailTV = header.findViewById(R.id.navigationEmailTV);
-        try{
+        final TextView navigationNameTV = header.findViewById(R.id.navigationNameTV);
+        final TextView navigationEmailTV = header.findViewById(R.id.navigationEmailTV);
 
-            if(mAuth.getCurrentUser() != null){
-                navigationNameTV.setText(mAuth.getCurrentUser().getDisplayName());
-                navigationEmailTV.setText(mAuth.getCurrentUser().getEmail());
+
+
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() != null){
+                    navigationNameTV.setText(mAuth.getCurrentUser().getDisplayName());
+                    navigationEmailTV.setText(mAuth.getCurrentUser().getEmail());
+                }
             }
-        }catch (Exception e){
-
-        }
-
+        };
 
 
         getFragmentManager().beginTransaction().add(R.id.loginFragment, new WebViewFragment()).commit();
@@ -114,7 +118,12 @@ public class LoginActivity extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authStateListener);
     }
 
     @Override
@@ -150,28 +159,6 @@ public class LoginActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -198,26 +185,26 @@ public class LoginActivity extends AppCompatActivity
                 public void onClick(DialogInterface dialogInterface, int i) {
                     String user = "Anonymous";
                     if(mAuth.getCurrentUser() != null) {
-                        user = mAuth.getCurrentUser().getDisplayName();
+                        user = mAuth.getCurrentUser().getDisplayName()+" ("+mAuth.getCurrentUser().getEmail()+")";
                     }
-                        try {
-                            FirebaseDatabase database = FirebaseDatabase.getInstance();
-                            DatabaseReference myRef = database.getReference("Feedback");
-                            myRef.child(user).setValue(mAuth.getCurrentUser().getEmail()+": "+input.getText().toString()).addOnCompleteListener(
-                                    new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isComplete()) {
-                                                showToast(LoginActivity.this, "Feedback successfuly sent.");
-                                            } else {
-                                                showToast(LoginActivity.this, task.getException().getMessage());
-                                            }
+                    try {
+                        FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference myRef = database.getReference("Feedback");
+                        myRef.push().setValue(user+" : "+input.getText().toString()).addOnCompleteListener(
+                                new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isComplete()) {
+                                            showToast(LoginActivity.this, "Feedback successfuly sent.");
+                                        } else {
+                                            showToast(LoginActivity.this, task.getException().getMessage());
                                         }
                                     }
-                            );
-                        } catch (Exception e) {
-                            showToast(getApplicationContext(), e.getMessage());
-                        }
+                                }
+                        );
+                    } catch (Exception e) {
+                        showToast(getApplicationContext(), e.getMessage());
+                    }
 
 
                 }
@@ -234,6 +221,9 @@ public class LoginActivity extends AppCompatActivity
 
         } else if (id == R.id.aboutUs) {
             startActivity(new Intent(LoginActivity.this,AboutUsActivity.class));
+        }else if(id == R.id.hotels){
+            url_to_open = "http://rtdc.tourism.rajasthan.gov.in/Client/HotelList.aspx";
+            changeFragment(new WebViewFragment());
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

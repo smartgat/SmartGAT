@@ -7,21 +7,98 @@
     tools:context="com.example.anonymous.smartgat.AboutUsActivity">
 
     <ImageView
-        android:layout_width="108dp"
-        android:layout_height="108dp"
-        android:src="@mipmap/smart_gat_logo"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/aboutUsLogo"
-        android:layout_marginTop="60dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        android:background="@mipmap/about_us" />
 
+    <ImageView
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:id="@+id/aboutUsLogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:background="@mipmap/smart_gat_logo" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/app_name"
-        android:textStyle="bold"
+        android:text="SMART-GAT"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="#5EA762"
         android:layout_below="@+id/aboutUsLogo"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"/>
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="JAI SUKH PAUL SINGH"
+        android:textSize="22sp"
+        android:textColor="#000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="240dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-Overall Developer"
+        android:textSize="18sp"
+        android:textColor="#3b3b3b"
+        android:textStyle="bold"
+        android:layout_marginEnd="30dp"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="270dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="VARDHAN"
+        android:textSize="22sp"
+        android:textColor="#000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="320dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-Front End Developer"
+        android:textSize="18sp"
+        android:textColor="#3b3b3b"
+        android:textStyle="bold"
+        android:layout_marginEnd="30dp"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="350dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Amrit Ganjoo"
+        android:textSize="22sp"
+        android:textColor="#000"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textStyle="bold"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="400dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="-Hardware and Back End Developer"
+        android:textSize="18sp"
+        android:textColor="#3b3b3b"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="430dp"/>
 
 </RelativeLayout>
