@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:background="@mipmap/splash_img"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditText
+        android:id="@+id/userET"
+        android:background="@mipmap/tv_bg"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="@string/e_mail"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/passET"
+        android:background="@mipmap/tv_bg"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:padding="8dp"
+        android:layout_alignStart="@+id/userET"
+        android:layout_alignTop="@+id/userET"
+        android:layout_marginTop="62dp"
+        android:ems="10"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/loginBT"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:background="@mipmap/signout_bg"
+        android:layout_below="@+id/passET"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:text="@string/login" />
+
+    <TextView
+        android:id="@+id/resetTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/loginBT"
+        android:layout_below="@+id/loginBT"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:textStyle="bold"
+        android:text="Reset"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textColor="#fff" />
+
+    <TextView
+        android:id="@+id/registerTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/loginBT"
+        android:layout_below="@+id/loginBT"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:text="Register"
+        android:textStyle="bold"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:textColor="#fff" />
+
+
+</RelativeLayout>

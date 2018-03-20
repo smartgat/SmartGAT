@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/splash_img"
+    tools:context="com.example.anonymous.smartgat.RegisterActivity">
+
+    <EditText
+        android:id="@+id/rNameET"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/registerBT"
+        android:layout_marginTop="158dp"
+        android:ems="10"
+        android:hint="Name"
+        android:textColor="#fff"
+        android:background="@mipmap/tv_bg"
+        android:padding="8dp"
+        android:textColorHint="#fff"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/rEmailET"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="@mipmap/tv_bg"
+        android:layout_alignStart="@+id/registerBT"
+        android:layout_marginTop="225dp"
+        android:ems="10"
+        android:hint="Email"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/rPassET"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/rEmailET"
+        android:background="@mipmap/tv_bg"
+        android:layout_below="@+id/rEmailET"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Password"
+        android:padding="8dp"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/rConfirmPassET"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignEnd="@+id/rPassET"
+        android:layout_below="@+id/rPassET"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:background="@mipmap/tv_bg"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:hint="Confirm Password"
+        android:padding="8dp"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registerBT"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/rConfirmPassET"
+        android:textColor="#fff"
+        android:textColorHint="#fff"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:background="@mipmap/signout_bg"
+        android:paddingBottom="8dp"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+        android:onClick="rRegisterClicked"
+        android:text="Register" />
+
+</RelativeLayout>
